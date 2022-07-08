@@ -54,9 +54,9 @@ const App = () => {
       <div className="buttonCargar">
         <button onClick={getData}>Cargar</button>
       </div>
-      {/* <div className="container">
-        <SimpleView apiData={data} />
-      </div> */}
+      <div className="container">
+        <p>{data.image}</p>
+      </div>
     </div>
     
   )
