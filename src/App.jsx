@@ -42,8 +42,8 @@ const App = () => {
     getData();
   }
 
-  if(data){
-    console.log(data);
+  if(data!=null){
+    console.log("data",data);
   }
   return (
     
@@ -54,9 +54,10 @@ const App = () => {
       <div className="buttonCargar">
         <button onClick={getData}>Cargar</button>
       </div>
-      {/* <div className="container">
-        <SimpleView apiData={data} />
-      </div> */}
+      <div className="container">
+        <h2>HOLA MUNDO</h2>
+        {/* <p>{}</p> */}
+      </div>
     </div>
     
   )
