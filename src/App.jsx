@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from 'axios';
 import Header from './Header';
-
+import SimpleView from './mainView';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import Switch from '@mui/material/Switch';
@@ -25,12 +25,16 @@ const App = () => {
   }
   const getData = async () => {
     const result = await fetchData(50);
-    if (result){
-      setData(result);
-      
-      if(data!=null){
-        console.log("data:",data);
+    try {
+      if (result){
+        setData({result});
+        
+        if(data!=null){
+          console.log("data:",data);
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
   }
   
@@ -38,16 +42,26 @@ const App = () => {
     getData();
   }
 
-  return (
-    <div>
-      <button onClick={getData}>getHero</button>
-      
-    </div>
-  )
-
   if(data){
     console.log(data);
   }
+  return (
+    
+    <div className="MainContainer">
+      <div className="loaderContainer">
+      <h2>{data === null && <CircularProgress size={60} />}</h2>
+      </div>
+      <div className="buttonCargar">
+        <button onClick={getData}>Cargar</button>
+      </div>
+      {/* <div className="container">
+        <SimpleView apiData={data} />
+      </div> */}
+    </div>
+    
+  )
+
+  
 
 
   
