@@ -56,8 +56,12 @@ const App = () => {
         <button onClick={getData}>Cargar</button>
       </div>
       <div className="container">
+<<<<<<< HEAD
         <h2>HOLA MUNDO</h2>
         {/* <p>{}</p> */}
+=======
+        <p>{data.image}</p>
+>>>>>>> master
       </div>
     </div>
     
