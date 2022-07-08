@@ -44,6 +44,7 @@ const App = () => {
 
   if(data!=null){
     console.log("data",data);
+    console.log("data.result",data.result);
   }
   return (
     
