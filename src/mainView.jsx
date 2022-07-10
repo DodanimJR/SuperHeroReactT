@@ -1,19 +1,23 @@
 import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 
-const simpleView = ({ apiData }) => apiData && apiData((el, i) => 
-      <Card key={i} sx={{ maxWidth: 285}} style={{margin: 8}} raised>
-        <CardContent>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Nombre: {el.name}
-          </Typography>
-          <Typography variant="body2">
-            Image: {el.image}
-          </Typography>
-        </CardContent>
-        </Card>
-      )
+const SimpleView = ({ apidata }) => apidata && apidata.map((el, i) =>
+      
+      <div>
+        <h1>{el.data}</h1>
+      </div>
+      );
 
-export default simpleView;
+export default SimpleView;
+// {
+//     "data": {
+//       "response": "success",
+//       "id": "50",
+//       "name": "Atom",
+//       "powerstats": "{combat: \"null\", durability: \"null\", intelligence: …}",
+//       "biography": "{aliases: Array(2), alignment: \"good\", alter-egos: …}",
+//       "appearance": "{eye-color: \"Blue\", gender: \"Male\", hair-color: \"Re…}",
+//       "work": "{base: \"GBS Building, Gotham City (former) Calvin C…}",
+//       "connections": "{group-affiliation: \"formerly Justice Society of Am…}",
+//       "image": "{url: \"https://www.superherodb.com/pictures2/portra…}"
+//     }
+//   }
