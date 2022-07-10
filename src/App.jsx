@@ -87,7 +87,7 @@ const App = () => {
         
       </div>
       <div>
-        render={loaded!==null && <SimpleView data={data} />}
+        render={data!==null && <SimpleView data={data} />}
       </div>
     </div>
     
