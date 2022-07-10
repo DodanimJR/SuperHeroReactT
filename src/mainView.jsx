@@ -1,11 +1,14 @@
 import React from 'react';
 
-const SimpleView = ({ apidata }) => apidata && apidata.map((el, i) =>
-      
-      <div>
-        <h1>{el.data.name}</h1>
-      </div>
-      );
+const SimpleView = ({ apidata }) => {
+    return (
+        <div>
+        <h1>{apidata.name}</h1>
+        <img src={apidata.image.url} alt=""/>
+        <p>{apidata.description}</p>
+        </div>
+    );
+}
 
 export default SimpleView;
 // {
