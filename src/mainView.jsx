@@ -15,7 +15,7 @@ const SimpleView = (apidata) => {
                     <h3>{finaldata.work.occupation}</h3>
                     <h3>Connections:</h3>
                     <h4>Relatives:{finaldata.connections.relatives!==null &&finaldata.connections.relatives}</h4>
-                    <h4>{finaldata.connections["group-affiliation"]!==null &&finaldata.connections["group-affiliation"]}</h4>
+                    <h4>Groups:{finaldata.connections["group-affiliation"]!==null &&finaldata.connections["group-affiliation"]}</h4>
                 </div>
             </div>
             <div className='powerStats'>
@@ -27,12 +27,12 @@ const SimpleView = (apidata) => {
                 <h3>Combat:{finaldata.powerstats.combat!==null &&finaldata.powerstats.combat}</h3>
             </div>
             <div className='appearance'>
-                <p>{finaldata.appearance.gender}</p>
-                <p>{finaldata.appearance.race}</p>
-                <p>{finaldata.appearance["eye-color"]}</p>
-                <p>{finaldata.appearance["hair-color"]}</p>
-                <p>{finaldata.appearance.height}</p>
-                <p>{finaldata.appearance.weight}</p>
+                <p>Gender:{finaldata.appearance.gender}</p>
+                <p>Race:{finaldata.appearance.race}</p>
+                <p>Eye color:{finaldata.appearance["eye-color"]}</p>
+                <p>Hair color:{finaldata.appearance["hair-color"]}</p>
+                <p>Height:{finaldata.appearance.height[0]-finaldata.appearance.height[1]}</p>
+                <p>Weitht:{finaldata.appearance.weight[0]-finaldata.appearance.weight[1]}</p>
             </div>
             <div className='biography'>
                 <p>Full name:{finaldata.biography["full-name"]}</p>
