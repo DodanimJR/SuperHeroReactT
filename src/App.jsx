@@ -41,32 +41,40 @@ const App = () => {
     }
 
   }, [SearchNewHero]);
+
+  function viewButtonClick() {
+    console.log('clicked');
+    // setView(!view);
+    // console.log(view)
+  }
   const buttonClick = () => {
+    viewButtonClick();
     if(data){
-      setRecentlyFound([...RecentlyFound, data]);
-      setRecentListLength(RecentListLength+1);
       
-      //console.log(RecentlyFound);
+      setRecentlyFound([...RecentlyFound, data]);
     }
     setSearchNewHero(!SearchNewHero);
   }
-  useEffect(()=>{
-    console.log(RecentlyFound);
-    RecentlyFound.map((item)=>{
-      console.log(item);
-      return(<li>{item.name}</li>);
-    })
-  },[RecentListLength]);
+  // useEffect(()=>{
+  //   console.log(RecentlyFound);
+  //   RecentlyFound.map((item)=>{
+  //     console.log(item);
+  //     return(<li>{item.name}</li>);
+  //   })
+  // },[RecentListLength]);
 
-  // const viewButtonClick = () => {
-  //   setView(!view);
-  //   console.log(view);
-  // }
-  document.getElementsByClassName('btnView').onClick = function(){
-    console.log('clicked');
-    setView(!view);
-    console.log(view)
+  const pablo = () => {
+    console.log('PABLO HPTA ME LE CAGO 10 VECES');
   }
+    
+    
+  
+
+  // document.getElementsByClassName('btnView').onClick = function(){
+  //   console.log('clicked');
+  //   setView(!view);
+  //   console.log(view)
+  // }
   console.log("data: ",data);
   return (
     
@@ -74,8 +82,8 @@ const App = () => {
       <div className="loaderContainer">
       <h2>{data === null && <CircularProgress size={600} />}</h2>
       </div>
-      <div className="listaHeroes" >
-          <RecentList list={RecentlyFound} />
+      <div className="listaHeroes" id="listaHeroes">
+          <RecentList list={RecentlyFound} handleClick={viewButtonClick} />
       </div>
       <div className="container">
         <h2>HOLA MUNDO</h2>
