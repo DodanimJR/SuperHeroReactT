@@ -1,13 +1,7 @@
 import React from 'react';
 
 const SimpleView = ({ apidata }) => {
-    return (
-        <div>
-        <h1>{apidata.result.name}</h1>
-        <img src={apidata.result.image.url} alt=""/>
-        <p>{apidata.result.description}</p>
-        </div>
-    );
+    console.log("apidata:",apidata);
 }
 
 export default SimpleView;
