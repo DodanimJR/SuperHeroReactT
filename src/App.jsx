@@ -61,7 +61,7 @@ const App = () => {
   }, [data]);
 
   useEffect(()=>{
-    if(clickedIndex){
+    if(clickedIndex!=null){
       for(const hero of RecentlyFound){
         if(hero.listIndex==clickedIndex){
           setData(hero);
