@@ -63,7 +63,7 @@ const App = () => {
   useEffect(()=>{
     if(clickedIndex!=null){
       for(const hero of RecentlyFound){
-        if(hero.listIndex==clickedIndex){
+        if(hero.name==clickedIndex){
           setData(hero);
         }
       }
@@ -82,22 +82,26 @@ const App = () => {
   console.log("data: ",data);
   return (
     
-    <div className="MainDiv">
-      <div className="loaderContainer">
-      <h2>{data === null && <CircularProgress size={600} />}</h2>
-      </div>
-      <div className="listaHeroes" id="listaHeroes">
+    <div >
+      <div className="PABLO">
+        <div className="listaHeroes" id="listaHeroes">
           <RecentList list={RecentlyFound}  setclickedIndex={setclickedIndex} clickedIndex={clickedIndex}  />
-      </div>
-      <div className="container">
+        </div>
+        <div className="fullInfo">
         <h2>HOLA MUNDO</h2>
         <button onClick={FavbuttonClick}>FAVORITE</button>
         <button onClick={RandombuttonClick}>RANDOM HERO</button>
-        <div className="fullInfo">
         {data!==null && <SimpleView data={data} />}
-        </div>
-        
       </div>
+      </div>
+      <div className="MainDiv">
+      <div className="loaderContainer">
+        <h2>{data === null && <CircularProgress size={600} />}</h2>
+      </div>
+      
+      
+      
+    </div>
     </div>
     
   )

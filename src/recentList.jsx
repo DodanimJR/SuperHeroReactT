@@ -80,7 +80,7 @@ const RecentList = (props)=>{
           <Typography>{el.listIndex}</Typography>
         </CardContent>
         <CardActions>
-        <Button size="small" color="primary" onClick={()=>clickHandler(el.listIndex)} >
+        <Button size="small" color="primary" onClick={()=>clickHandler(el.name)} >
           view
         </Button>
         </CardActions>
