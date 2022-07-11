@@ -5,9 +5,15 @@ import SimpleView from './mainView';
 import RecentList from './recentList';
 
 import CircularProgress from '@mui/material/CircularProgress';
-import Switch from '@mui/material/Switch';
+import { Card  } from "@mui/material";
+import MuiCard from '@mui/material/Card';
+import MuiCardContent from '@mui/material/CardContent';
+import MuiTypography from '@mui/material/Typography';
+
 
 import './App.css';
+import { Event } from "@mui/icons-material";
+import { click } from "@testing-library/user-event/dist/click";
 
 
 
@@ -16,7 +22,7 @@ const App = () => {
   const [SearchNewHero, setSearchNewHero] = useState(false);
   const [RecentlyFound, setRecentlyFound] = useState([]);
   const [RecentListLength, setRecentListLength] = useState(0);
-  const [view, setView] = useState(false);
+  const [clickedIndex, setclickedIndex] = useState(false);
   function generateRandomInteger(max) {
     return Math.floor(Math.random() * max) + 1;
   }
@@ -30,51 +36,49 @@ const App = () => {
         console.error(err);
       }
     }
-    if(!data){
-      const randomId=generateRandomInteger(700);
-      fetchData(`https://cors-anywhere.herokuapp.com/https://www.superheroapi.com/api/2223169807851173/${randomId}`, setData);
-    }
-    
     if(SearchNewHero!=false){
-      const randomId=generateRandomInteger(700);
+      const randomId=generateRandomInteger(732);
       fetchData(`https://cors-anywhere.herokuapp.com/https://www.superheroapi.com/api/2223169807851173/${randomId}`, setData);
     }
 
   }, [SearchNewHero]);
+  useEffect(() => {
+    const fetchData = async (url, hook) => {
+      try{
+        const result = await axios.get(url);
+        if(SearchNewHero!=false){setSearchNewHero(!SearchNewHero);}
+        hook(result.data);
+      } catch (err){
+        console.error(err);
+      }
+    }
+    if(!data){
+      const randomId=generateRandomInteger(732);
+      fetchData(`https://cors-anywhere.herokuapp.com/https://www.superheroapi.com/api/2223169807851173/${randomId}`, setData);
+    }else{
+      console.log('?');
+    }
+  }, [data]);
 
-  function viewButtonClick() {
-    console.log('clicked');
-    // setView(!view);
-    // console.log(view)
-  }
-  const buttonClick = () => {
-    viewButtonClick();
-    if(data){
+  useEffect(()=>{
+    if(clickedIndex){
+      for(const hero of RecentlyFound){
+        if(hero.listIndex==clickedIndex){
+          setData(hero);
+        }
+      }
       
+    }
+  }, [clickedIndex]);
+  const FavbuttonClick = () => {
+    if(data){
+      data['listIndex']=RecentlyFound.length;
       setRecentlyFound([...RecentlyFound, data]);
     }
+  }
+  const RandombuttonClick = () => {
     setSearchNewHero(!SearchNewHero);
   }
-  // useEffect(()=>{
-  //   console.log(RecentlyFound);
-  //   RecentlyFound.map((item)=>{
-  //     console.log(item);
-  //     return(<li>{item.name}</li>);
-  //   })
-  // },[RecentListLength]);
-
-  const pablo = () => {
-    console.log('PABLO HPTA ME LE CAGO 10 VECES');
-  }
-    
-    
-  
-
-  // document.getElementsByClassName('btnView').onClick = function(){
-  //   console.log('clicked');
-  //   setView(!view);
-  //   console.log(view)
-  // }
   console.log("data: ",data);
   return (
     
@@ -83,15 +87,16 @@ const App = () => {
       <h2>{data === null && <CircularProgress size={600} />}</h2>
       </div>
       <div className="listaHeroes" id="listaHeroes">
-          <RecentList list={RecentlyFound} handleClick={viewButtonClick} />
+          <RecentList list={RecentlyFound}  setclickedIndex={setclickedIndex} clickedIndex={clickedIndex}  />
       </div>
       <div className="container">
         <h2>HOLA MUNDO</h2>
-        <button onClick={buttonClick}>RANDOM HERO</button>
+        <button onClick={FavbuttonClick}>FAVORITE</button>
+        <button onClick={RandombuttonClick}>RANDOM HERO</button>
         <div className="fullInfo">
         {data!==null && <SimpleView data={data} />}
         </div>
-        {/* <p>{}</p> */}
+        
       </div>
     </div>
     

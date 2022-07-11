@@ -1,6 +1,7 @@
 {
   "name": "clase",
   "version": "0.1.0",
+  "proxy":"https://www.superheroapi.com/api/2223169807851173/" ,
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
