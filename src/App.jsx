@@ -5,15 +5,11 @@ import SimpleView from './mainView';
 import RecentList from './recentList';
 
 import CircularProgress from '@mui/material/CircularProgress';
-import { Card  } from "@mui/material";
-import MuiCard from '@mui/material/Card';
-import MuiCardContent from '@mui/material/CardContent';
-import MuiTypography from '@mui/material/Typography';
+
 
 
 import './App.css';
-import { Event } from "@mui/icons-material";
-import { click } from "@testing-library/user-event/dist/click";
+
 
 
 
@@ -21,8 +17,9 @@ const App = () => {
   const [data, setData] = useState(null);
   const [SearchNewHero, setSearchNewHero] = useState(false);
   const [RecentlyFound, setRecentlyFound] = useState([]);
-  const [RecentListLength, setRecentListLength] = useState(0);
+
   const [clickedIndex, setclickedIndex] = useState(false);
+  const btnFavorites=document.getElementById("btnFavorites");
   function generateRandomInteger(max) {
     return Math.floor(Math.random() * max) + 1;
   }
@@ -56,7 +53,14 @@ const App = () => {
       const randomId=generateRandomInteger(732);
       fetchData(`https://cors-anywhere.herokuapp.com/https://www.superheroapi.com/api/2223169807851173/${randomId}`, setData);
     }else{
-      console.log('?');
+      console.log('data Updated');
+      if(data['favorite']==true){
+        btnFavorites.style.color="red";
+        btnFavorites.innerText="Remove from favorites";
+      }else{
+        btnFavorites.style.color="green";
+        btnFavorites.innerText="Add to favorites";
+      }
     }
   }, [data]);
 
@@ -72,8 +76,21 @@ const App = () => {
   }, [clickedIndex]);
   const FavbuttonClick = () => {
     if(data){
-      data['listIndex']=RecentlyFound.length;
-      setRecentlyFound([...RecentlyFound, data]);
+      if(btnFavorites.innerText=="Add to favorites"){
+        
+        btnFavorites.style.color="red";
+        btnFavorites.innerText="Remove from favorites";
+        data['listIndex']=RecentlyFound.length;
+        data['favorite']=true;
+        setRecentlyFound([...RecentlyFound, data]);
+      }else if(btnFavorites.innerText=="Remove from favorites"){
+
+        btnFavorites.style.color="green";
+        btnFavorites.innerText="Add to favorites";
+        data['favorite']=false;
+        setRecentlyFound(RecentlyFound.filter(hero=>hero.name!=data.name));
+
+      }
     }
   }
   const RandombuttonClick = () => {
@@ -83,32 +100,38 @@ const App = () => {
   return (
     
     <div >
+      <Header></Header>
       <div className="PABLO">
         <div className="listaHeroes" id="listaHeroes">
+          <h1>Favorite Heroes</h1>
           <RecentList list={RecentlyFound}  setclickedIndex={setclickedIndex} clickedIndex={clickedIndex}  />
         </div>
         <div className="fullInfo">
-        <h2>HOLA MUNDO</h2>
-        <button onClick={FavbuttonClick}>FAVORITE</button>
-        <button onClick={RandombuttonClick}>RANDOM HERO</button>
+          <div><h1>Main Info</h1></div>
+        <div className="buttonGroup">
+          <button  id="btnFavorites" onClick={FavbuttonClick}>Add to Favorites</button>
+          <button className="button-54" onClick={RandombuttonClick}>RANDOM HERO</button>
+        </div>
         {data!==null && <SimpleView data={data} />}
       </div>
       </div>
-      <div className="MainDiv">
+      
       <div className="loaderContainer">
         <h2>{data === null && <CircularProgress size={600} />}</h2>
       </div>
-      
-      
-      
-    </div>
+      <footer>
+      <div class="footer-content">
+        <h3>DODANIMJR</h3>
+        <p>Pablo tiene talento para el UX</p>
+      </div>
+      <div class="footer-bottom">
+        <p>copyright &copy;2022 <a href="https://github.com/DodanimJR">DODANIMJR</a>  </p>
+        
+      </div>
+    </footer>
     </div>
     
   )
 
-  
-
-
-  
 }
 export default App;
