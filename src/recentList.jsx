@@ -3,20 +3,22 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import { makeStyles } from '@mui/material/styles';
+// import { makeStyles } from '@mui/styles.';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-const useStyles = makeStyles({
-  root: {
-    marginRight: "4px",
-    fontSize: "16px",
-    letterSpacing: "2px",
-    color: "#000000",
-    border: "3px solid",
-    padding: "0.25em 0.5em",
-    boxShadow: "1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px",
-    position: "relative",
-  }
-});
+// const useStyles = makeStyles({
+//   root: {
+//     marginRight: "4px",
+//     fontSize: "16px",
+//     letterSpacing: "2px",
+//     color: "#000000",
+//     border: "3px solid",
+//     padding: "0.25em 0.5em",
+//     boxShadow: "1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px",
+//     position: "relative",
+//   }
+// });
+
+
 
 const theme = createTheme({
   status: {
@@ -52,7 +54,18 @@ const theme = createTheme({
   
 });
 const RecentList = (props)=>{
-  const classes = useStyles();
+  // const estilos = (style={
+  //     marginRight: "4px",
+  //     fontSize: "16px",
+  //     letterSpacing: "2px",
+  //     color: "#000000",
+  //     border: "3px solid",
+  //     padding: "0.25em 0.5em",
+  //     boxShadow: "1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px",
+  //     position: "relative",
+  //     maxWidth: 285,
+  // })
+  // const classes = useStyles();
 
   const clickHandler=(id)=>{
     props.setclickedIndex(id);
@@ -65,7 +78,17 @@ const RecentList = (props)=>{
     props.list && props.list.map((el, i) => 
 
       <ThemeProvider theme={theme}>
-        <Card key={i} sx={{ maxWidth: 285}} style={{margin: 8}} theme={theme} className={classes.root} raised>
+        <Card key={i} sx={{
+          marginRight: "4px",
+      fontSize: "16px",
+      letterSpacing: "2px",
+      color: "#000000",
+      border: "3px solid",
+      padding: "0.25em 0.5em",
+      boxShadow: "1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px",
+      position: "relative",
+      maxWidth: 285,
+        }} style={{margin: 8}} theme={theme} className="Dodi" raised>
         
           <CardContent>
             <Typography variant='h4' sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -91,30 +114,4 @@ const RecentList = (props)=>{
   )
   );
 }
-
-// const RecentList = ({ list },{handleClick}) => list && list.map((el, i) =>     
-//   <Card key={i} sx={{ maxWidth: 285}} style={{margin: 8}} raised>
-//         <CardContent>
-//           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-//             {el.name}
-//           </Typography>
-//           {/* <Typography variant="h5" component="div">
-//             {el.symbol}
-//           </Typography> */}
-//           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-//             Full Name: {el.biography['full-name']}
-//           </Typography>
-//           <Typography variant="body2">
-//             Publsher: {el.biography.publisher}
-//           </Typography>
-//         </CardContent>
-//         <CardActions>
-//         <Button size="small" color="primary" onClick={handleClick}>
-//           view
-//         </Button>
-//         </CardActions>
-//         </Card>
-//     );
-
-
 export default RecentList;
